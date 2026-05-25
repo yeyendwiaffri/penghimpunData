@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUN075nhR3S1_Cw904jQlfB11Ch5nrWzqCql0MlUVjKXM5EkGqPYPPgJwUcjlDq9eupQ/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPLMC_gMsWdRK56pkg80Hrr7HKFYW9LoSKpfvosVmJpDNRmLroTGXz8WgBLWtyK7XFaA/exec";
 
 const canvas = document.getElementById("signaturePad");
 const ctx = canvas.getContext("2d");
