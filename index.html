@@ -1,41 +1,80 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>FORM TTD</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+const SCRIPT_URL = "";
 
-<div class="container">
-  <h2>FORM TTD</h2>
+const canvas = document.getElementById("signaturePad");
+const ctx = canvas.getContext("2d");
 
-  <label>Nama</label>
-  <input type="text" id="nama" required>
+let drawing = false;
 
-  <label>NIM</label>
-  <input type="text" id="nim" required>
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
 
-  <label>Data 1 (PDF/JPG)</label>
-  <input type="file" id="data1" accept=".pdf,.jpg,.jpeg" required>
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "#000";
+}
 
-  <label>Data 2 (PDF/JPG)</label>
-  <input type="file" id="data2" accept=".pdf,.jpg,.jpeg" required>
+resizeCanvas();
 
-  <label>Data 3 (PDF/JPG)</label>
-  <input type="file" id="data3" accept=".pdf,.jpg,.jpeg" required>
+window.addEventListener("resize", resizeCanvas);
 
-  <label>TTD</label>
-  <canvas id="signaturePad"></canvas>
+function getPosition(e) {
 
-  <div class="buttons">
-    <button type="button" onclick="clearSignature()">Hapus TTD</button>
-    <button type="button" onclick="submitForm()">Kirim</button>
-  </div>
+  const rect = canvas.getBoundingClientRect();
 
-  <p id="status"></p>
-</div>
+  if (e.touches) {
+    return {
+      x: e.touches[0].clientX - rect.left,
+      y: e.touches[0].clientY - rect.top
+    };
+  }
 
-<script src="script.js"></script>
-</body>
-</html>
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  };
+}
+
+function startDraw(e) {
+
+  drawing = true;
+
+  const pos = getPosition(e);
+
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+}
+
+function draw(e) {
+
+  if (!drawing) return;
+
+  e.preventDefault();
+
+  const pos = getPosition(e);
+
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+}
+
+function stopDraw() {
+  drawing = false;
+}
+
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("mouseup", stopDraw);
+canvas.addEventListener("mouseleave", stopDraw);
+
+canvas.addEventListener("touchstart", startDraw);
+canvas.addEventListener("touchmove", draw);
+canvas.addEventListener("touchend", stopDraw);
+
+function clearSignature() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function submitForm() {
+
+  alert("Tombol kirim berhasil ditekan");
+}
