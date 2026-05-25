@@ -1,4 +1,4 @@
-const SCRIPT_URL = "PASTE_URL_WEB_APP_DI_SINI";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUN075nhR3S1_Cw904jQlfB11Ch5nrWzqCql0MlUVjKXM5EkGqPYPPgJwUcjlDq9eupQ/exec";
 
 const canvas = document.getElementById("signaturePad");
 const ctx = canvas.getContext("2d");
