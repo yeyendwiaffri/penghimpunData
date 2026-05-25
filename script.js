@@ -1,7 +1,8 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUN075nhR3S1_Cw904jQlfB11Ch5nrWzqCql0MlUVjKXM5EkGqPYPPgJwUcjlDq9eupQ/exec";
+const SCRIPT_URL = "PASTE_URL_WEB_APP_DI_SINI";
 
 const canvas = document.getElementById("signaturePad");
 const ctx = canvas.getContext("2d");
+
 let drawing = false;
 
 function resizeCanvas() {
@@ -76,12 +77,10 @@ function fileToBase64(input) {
     const reader = new FileReader();
 
     reader.onload = () => {
-      const base64 = reader.result.split(",")[1];
-
       resolve({
         fileName: file.name,
         mimeType: file.type,
-        base64: base64
+        base64: reader.result.split(",")[1]
       });
     };
 
@@ -101,9 +100,12 @@ async function submitForm() {
     return;
   }
 
-  status.innerText = "Mengirim data...";
+  if (!SCRIPT_URL) {
+    status.innerText = "SCRIPT_URL belum diisi.";
+    return;
+  }
 
-  const ttdBase64 = canvas.toDataURL("image/png").split(",")[1];
+  status.innerText = "Mengirim data...";
 
   const payload = {
     nama: nama,
@@ -112,9 +114,9 @@ async function submitForm() {
     data2: await fileToBase64(document.getElementById("data2")),
     data3: await fileToBase64(document.getElementById("data3")),
     ttd: {
-      fileName: `${nim}_ttd.png`,
+      fileName: nim + "_ttd.png",
       mimeType: "image/png",
-      base64: ttdBase64
+      base64: canvas.toDataURL("image/png").split(",")[1]
     }
   };
 
@@ -125,7 +127,7 @@ async function submitForm() {
       body: JSON.stringify(payload)
     });
 
-    status.innerText = "Data berhasil dikirim.";
+    status.innerText = "Data berhasil dikirim. Silakan cek Google Sheet.";
   } catch (error) {
     status.innerText = "Gagal mengirim data.";
   }
