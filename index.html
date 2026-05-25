@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>FORM TTD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>FORM TTD</h2>
+
+  <label>Nama</label>
+  <input type="text" id="nama" required>
+
+  <label>NIM</label>
+  <input type="text" id="nim" required>
+
+  <label>Data 1 (PDF/JPG)</label>
+  <input type="file" id="data1" accept=".pdf,.jpg,.jpeg" required>
+
+  <label>Data 2 (PDF/JPG)</label>
+  <input type="file" id="data2" accept=".pdf,.jpg,.jpeg" required>
+
+  <label>Data 3 (PDF/JPG)</label>
+  <input type="file" id="data3" accept=".pdf,.jpg,.jpeg" required>
+
+  <label>TTD</label>
+  <canvas id="signaturePad"></canvas>
+
+  <div class="buttons">
+    <button type="button" onclick="clearSignature()">Hapus TTD</button>
+    <button type="button" onclick="submitForm()">Kirim</button>
+  </div>
+
+  <p id="status"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
