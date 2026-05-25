@@ -1,4 +1,4 @@
-const SCRIPT_URL = "ISI_DENGAN_URL_WEB_APP_GOOGLE_APPS_SCRIPT";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUN075nhR3S1_Cw904jQlfB11Ch5nrWzqCql0MlUVjKXM5EkGqPYPPgJwUcjlDq9eupQ/exec";
 
 const canvas = document.getElementById("signaturePad");
 const ctx = canvas.getContext("2d");
