@@ -93,10 +93,11 @@ async function submitForm() {
   const status = document.getElementById("status");
 
   const nama = document.getElementById("nama").value.trim();
+  const nama = document.getElementById("email").value.trim();
   const nim = document.getElementById("nim").value.trim();
 
-  if (!nama || !nim) {
-    status.innerText = "Nama dan NIM wajib diisi.";
+  if (!nama || !email || !nim) {
+    status.innerText = "Nama ,Email dan NIM  wajib diisi.";
     return;
   }
 
