@@ -2,7 +2,6 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPLMC_gMsWdRK56pkg8
 
 const canvas = document.getElementById("signaturePad");
 const ctx = canvas.getContext("2d");
-
 let drawing = false;
 
 function resizeCanvas() {
@@ -77,10 +76,12 @@ function fileToBase64(input) {
     const reader = new FileReader();
 
     reader.onload = () => {
+      const base64 = reader.result.split(",")[1];
+
       resolve({
         fileName: file.name,
         mimeType: file.type,
-        base64: reader.result.split(",")[1]
+        base64: base64
       });
     };
 
@@ -100,12 +101,9 @@ async function submitForm() {
     return;
   }
 
-  if (!SCRIPT_URL) {
-    status.innerText = "SCRIPT_URL belum diisi.";
-    return;
-  }
-
   status.innerText = "Mengirim data...";
+
+  const ttdBase64 = canvas.toDataURL("image/png").split(",")[1];
 
   const payload = {
     nama: nama,
@@ -114,9 +112,9 @@ async function submitForm() {
     data2: await fileToBase64(document.getElementById("data2")),
     data3: await fileToBase64(document.getElementById("data3")),
     ttd: {
-      fileName: nim + "_ttd.png",
+      fileName: `${nim}_ttd.png`,
       mimeType: "image/png",
-      base64: canvas.toDataURL("image/png").split(",")[1]
+      base64: ttdBase64
     }
   };
 
@@ -127,7 +125,7 @@ async function submitForm() {
       body: JSON.stringify(payload)
     });
 
-    status.innerText = "Data berhasil dikirim. Silakan cek Google Sheet.";
+    status.innerText = "Data berhasil dikirim.";
   } catch (error) {
     status.innerText = "Gagal mengirim data.";
   }
