@@ -93,11 +93,10 @@ function fileToBase64(input) {
 async function submitForm() {
   const status = document.getElementById("status");
 
-  const nama = document.getElementById("email").value.trim();
   const nama = document.getElementById("nama").value.trim();
   const nim = document.getElementById("nim").value.trim();
 
-  if (!email || !nama || !nim) {
+  if (!nama || !nim) {
     status.innerText = "Nama dan NIM wajib diisi.";
     return;
   }
@@ -107,7 +106,6 @@ async function submitForm() {
   const ttdBase64 = canvas.toDataURL("image/png").split(",")[1];
 
   const payload = {
-    email: email,
     nama: nama,
     nim: nim,
     data1: await fileToBase64(document.getElementById("data1")),
