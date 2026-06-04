@@ -120,7 +120,6 @@ async function submitForm() {
     }
   };
  
-    //alert(JSON.stringify(payload));
   
   try {
     await fetch(SCRIPT_URL, {
