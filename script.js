@@ -95,19 +95,21 @@ async function submitForm() {
 
   const nama = document.getElementById("nama").value.trim();
   const nim = document.getElementById("nim").value.trim();
+  const nama = document.getElementById("keterangan").value.trim();
 
   if (!nama || !nim) {
     status.innerText = "Nama dan NIM wajib diisi.";
     return;
   }
 
-  status.innerText = "Mengirim data...";
+  status.innerText = "tunggu kami sedang proses Mengirim data anda...";
 
   const ttdBase64 = canvas.toDataURL("image/png").split(",")[1];
 
   const payload = {
     nama: nama,
     nim: nim,
+    keterangan: keterangan,
     data1: await fileToBase64(document.getElementById("data1")),
     data2: await fileToBase64(document.getElementById("data2")),
     data3: await fileToBase64(document.getElementById("data3")),
