@@ -97,7 +97,7 @@ async function submitForm() {
   const nim = document.getElementById("nim").value.trim();
   const keterangan = document.getElementById("keterangan").value.trim();
 
-  if (!nama || !nim) {
+  if (!nama || !nim || !keterangan) {
     status.innerText = "Nama dan NIM wajib diisi.";
     return;
   }
@@ -119,15 +119,16 @@ async function submitForm() {
       base64: ttdBase64
     }
   };
-
+ 
+    //alert(JSON.stringify(payload));
+  
   try {
     await fetch(SCRIPT_URL, {
       method: "POST",
       mode: "no-cors",
       body: JSON.stringify(payload)
     });
-    console.log(payload);
-    alert(JSON.stringify(payload));
+    
     status.innerText = "Data berhasil dikirim.";
   } catch (error) {
     status.innerText = "Gagal mengirim data.";
