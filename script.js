@@ -126,7 +126,8 @@ async function submitForm() {
       mode: "no-cors",
       body: JSON.stringify(payload)
     });
-
+    console.log(payload);
+    alert(JSON.stringify(payload));
     status.innerText = "Data berhasil dikirim.";
   } catch (error) {
     status.innerText = "Gagal mengirim data.";
