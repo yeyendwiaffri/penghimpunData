@@ -95,7 +95,7 @@ async function submitForm() {
 
   const nama = document.getElementById("nama").value.trim();
   const nim = document.getElementById("nim").value.trim();
-  const nama = document.getElementById("keterangan").value.trim();
+  const keterangan = document.getElementById("keterangan").value.trim();
 
   if (!nama || !nim) {
     status.innerText = "Nama dan NIM wajib diisi.";
